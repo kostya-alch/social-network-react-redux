@@ -3,7 +3,7 @@ import preloader from '../../../assets/images/preloader.svg'
 
 let Preloader = (props) => {
    return <div>
-      <div style={{mixBlendMode: 'multiply'}}>
+      <div >
          <img src={preloader} alt={'preloader'} />
       </div>
    </div>
