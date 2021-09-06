@@ -58,7 +58,6 @@ let MapStateToProps = (state) => {
 }
 
 
-
 export default connect(MapStateToProps, {
    follow,
    unfollow,
