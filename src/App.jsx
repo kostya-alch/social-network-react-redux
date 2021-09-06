@@ -15,11 +15,10 @@ const App = (props) => {
             <div className='app-wrapper-content'>
                <Route path='/messages'
                   render={() => <DialogsContainer
-                     store={props.store} />} />
+                  />} />
 
-               <Route path='/profiles'
-                  render={() => <ProfileContainer
-                     store={props.store} />} />
+               <Route path='/profiles/:userId?'
+                  render={() => <ProfileContainer />} />
 
                <Route path='/users'
                   render={() => <UsersContainer />} />
