@@ -16,4 +16,14 @@ export const usersAPI = {
         return response.data;
       });
   },
+  follow(u) {
+    return instance.post(
+      `https://social-network.samuraijs.com/api/1.0/follow/${u}`
+    );
+  },
+  unFollow(u) {
+    return instance.delete(
+      `https://social-network.samuraijs.com/api/1.0/follow/${u}`
+    );
+  },
 };
