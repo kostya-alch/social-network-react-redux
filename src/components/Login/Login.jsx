@@ -6,8 +6,6 @@ import styles from './Login.module.css'
 
 const Login = () => (
    <div>
-
-
       <Formik
          initialValues={{ email: "", password: "", rememberMe: true }}
          validateOnBlur
