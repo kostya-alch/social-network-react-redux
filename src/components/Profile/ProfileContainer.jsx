@@ -5,11 +5,16 @@ import { compose } from 'redux'
 import { withAuthRedirect } from '../../hoc/authRedirect'
 import { getStatus, getUserProfile, updateStatus } from '../../redux/profile-reducer'
 import Profile from './Profile'
+
+
 class ProfileContainer extends React.Component {
    componentDidMount() {
       let userId = this.props.match.params.userId
       if (!userId) {
          userId = this.props.authorizedUserId;
+         if (!userId) {
+            this.props.history.push('/login')
+         }
       }
       this.props.getUserProfile(userId)
       this.props.getStatus(userId)
