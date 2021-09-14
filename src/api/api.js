@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import { getAuthUserData } from '../redux/auth-reducer';
 
 const instance = axios.create({
   withCredentials: true,
@@ -58,3 +59,19 @@ export const authAPI = {
     return instance.delete(`auth/login`);
   },
 };
+
+export const LoginAPI = (email,password, rememberMe, setSubmitting, setFieldError, setStatus) => (dispatch) => {
+    
+  authAPI.login(email, password, rememberMe)
+      .then(response => {
+          if(response.data.resultCode === 0){
+              dispatch(getAuthUserData())
+          }
+          else {
+              setStatus(response.data.messages)
+              //response.data.messages  тут лежит строка "Incorrect anti-bot symbols" либо  'Incorrect Email or Password'
+          }
+
+      })   
+}
+

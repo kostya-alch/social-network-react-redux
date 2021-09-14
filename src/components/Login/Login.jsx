@@ -17,11 +17,11 @@ const Login = (props) => {
       <Formik
          initialValues={{ email: "", password: "", rememberMe: true }}
          validateOnBlur
-         onSubmit={(values) => { props.login(values.email, values.password, values.rememberMe) }}
+         onSubmit={(values, {setStatus}) => {  props.login(values.email, values.password, values.rememberMe, setStatus) }}
          validationSchema={loginFormSchema}
 
       >
-         {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
+         {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty, status }) => (
             <div className={styles.container}>
                <div className={styles.header}><h1><span>Login</span></h1></div>
                <p>
@@ -61,7 +61,7 @@ const Login = (props) => {
                      /><label className={styles.check} htmlFor={'rememberMe'}> Remember me? </label>
                   </p>
 
-
+                  <div>{status}</div>
                   <button disabled={!isValid && !dirty}
                      onClick={handleSubmit}
                      type={'submit'}>Send</button>
