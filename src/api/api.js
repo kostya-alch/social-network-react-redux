@@ -47,4 +47,14 @@ export const authAPI = {
       withCredentials: true,
     });
   },
+  login(email, password, rememberMe = false) {
+    return instance.post(`auth/login`, {
+      email,
+      password,
+      rememberMe,
+    });
+  },
+  logout() {
+    return instance.delete(`auth/login`);
+  },
 };
