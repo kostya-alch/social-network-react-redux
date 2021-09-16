@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { login } from "../../redux/auth-reducer";
 import { Redirect } from "react-router";
 
-
+// Компонента для авторизации.
 
 const Login = (props) => {
    if (props.isAuth) {

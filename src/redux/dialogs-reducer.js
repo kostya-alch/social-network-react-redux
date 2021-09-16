@@ -1,5 +1,7 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
+
+// Редьюсер диалогов
 let initialState = {
   dialogs: [
     { id: 1, name: 'Костя' },

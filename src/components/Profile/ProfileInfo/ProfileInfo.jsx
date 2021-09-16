@@ -10,9 +10,6 @@ const ProfileInfo = (props) => {
    }
    return (
       <div>
-         {/* <div>
-            <img width='200px' src="https://catherineasquithgallery.com/uploads/posts/2021-02/1612768484_140-p-fon-golubogo-morya-184.jpg" alt="" />
-         </div> */}
          <div className={styles.descriptionBlock}>
             <img src={props.profile.photos.small} alt={'user-img'} />
             <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus} />

@@ -1,3 +1,6 @@
+// Селекторы приложения для оптимизации кода
+
+
 export const getUsersPage = (state) => {
   return state.userPage.users;
 };

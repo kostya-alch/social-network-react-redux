@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = ' SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
+// Редьюсер, отвечающий за логику профиля.
 let initialState = {
   posts: [
     { id: 0, message: 'Hi!, i am friend!', likesCount: 15 },
@@ -52,22 +53,19 @@ export let setStatus = (status) => {
   };
 };
 
-export let getUserProfile = (userId) => (dispatch) => {
-  usersAPI.getProfile(userId).then((response) => {
-    dispatch(setUserProfile(response.data));
-  });
+export let getUserProfile = (userId) => async (dispatch) => {
+  let response = await usersAPI.getProfile(userId);
+  dispatch(setUserProfile(response.data));
 };
-export let getStatus = (userId) => (dispatch) => {
-  profileAPI.getStatus(userId).then((response) => {
-    dispatch(setStatus(response.data));
-  });
+export let getStatus = (userId) => async (dispatch) => {
+  let response = await profileAPI.getStatus(userId);
+  dispatch(setStatus(response.data));
 };
 
-export let updateStatus = (status) => (dispatch) => {
-  profileAPI.updateStatus(status).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(setStatus(status));
-    }
-  });
+export let updateStatus = (status) => async (dispatch) => {
+  let response = await profileAPI.updateStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
 };
 export default profileReducer;

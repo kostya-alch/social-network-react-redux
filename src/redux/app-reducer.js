@@ -1,4 +1,5 @@
 import { getAuthUserData } from './auth-reducer';
+// Редьюсер, отвечающий за глобальные функции приложения, например инициализацию.
 
 const INITIALAZED_SUCCESS = 'INITIALAZED_SUCCESS';
 

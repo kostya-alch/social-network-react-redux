@@ -3,17 +3,3 @@
    height: 200px;
 }
 
-.pageNumbers>span {
-   margin: 5px 5px 10px 5px;
-   cursor: pointer;
-
-}
-
-.pageElem:hover {
-   text-decoration: underline;
-   color: red;
-}
-.selectedPage {
-   font-weight: bold;
-
-}

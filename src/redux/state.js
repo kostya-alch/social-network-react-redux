@@ -1,7 +1,7 @@
 import dialogsReducer from './dialogs-reducer';
 import profileReducer from './profile-reducer';
 import sitebarReducer from './sidebar-reducer';
-
+// Реализация своего стора для понимания работы. Как подсказка при обучении.
 let store = {
   _state: {
     profilePage: {

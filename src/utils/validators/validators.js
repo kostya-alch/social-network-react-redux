@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 
+// Валидаторы форм в отдельном файле. Просто и в стороне от логики.
+
 export const loginFormSchema = Yup.object().shape({
   email: Yup.string()
     //минимальная длина - 2 символа

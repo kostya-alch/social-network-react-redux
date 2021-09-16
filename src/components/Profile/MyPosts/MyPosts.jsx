@@ -9,7 +9,6 @@ const maxLength10 = maxLengthCreator(10);
 
 
 const MyPosts = (props) => {
-
    let posts = props.posts.map(post =>
       <Post key={post.id} message={post.message} likesCount={post.likesCount} />)
 
@@ -30,7 +29,6 @@ const MyPosts = (props) => {
 }
 const Textarea = Element("textarea");
 const AddPostForm = (props) => {
-
    return (
       <form onSubmit={props.handleSubmit}>
          <div>
