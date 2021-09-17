@@ -2,16 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { compose } from 'redux';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import Navigation from './components/Nav/Navigation';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { withRouter } from 'react-router';
 import { initialazeApp } from './redux/app-reducer';
 import Preloader from './components/common/Prealoder/Preloader'
+import { WithSuspense } from './hoc/WithSuspense';
 
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 class App extends React.Component {
 
    componentDidMount() {
@@ -30,11 +31,10 @@ class App extends React.Component {
                <Navigation />
                <div className='app-wrapper-content'>
                   <Route path='/messages'
-                     render={() => <DialogsContainer
-                     />} />
+                     render={WithSuspense(DialogsContainer)} />
 
                   <Route path='/profiles/:userId?'
-                     render={() => <ProfileContainer />} />
+                     render={WithSuspense(ProfileContainer)} />
 
                   <Route path='/users'
                      render={() => <UsersContainer />} />
