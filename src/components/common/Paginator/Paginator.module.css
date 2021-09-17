@@ -1,15 +1,13 @@
-.pageNumbers>span {
-   margin: 5px 5px 10px 5px;
-   cursor: pointer;
-
+.paginator {
+   margin: 10px;
 }
 
-.pageElem:hover {
-   text-decoration: underline;
-   color: red;
+.pageNumber {
+   padding: 2px;
+   border: 1px solid grey;
 }
 
-.selectedPage {
+.pageNumber.selectedPage {
    font-weight: bold;
-
+   border-color: black;
 }
