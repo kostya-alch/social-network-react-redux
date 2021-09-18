@@ -60,11 +60,12 @@ export const authAPI = {
       withCredentials: true,
     });
   },
-  login(email, password, rememberMe = false) {
+  login(email, password, rememberMe = false, captcha = null) {
     return instance.post(`auth/login`, {
       email,
       password,
       rememberMe,
+      captcha,
     });
   },
   logout() {
@@ -84,3 +85,9 @@ export const LoginAPI =
       }
     });
   };
+
+export const securityAPI = {
+  getCaptchaUrl() {
+    return instance.get('security/get-captcha-url');
+  },
+};

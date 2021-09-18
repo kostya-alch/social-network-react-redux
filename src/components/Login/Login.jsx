@@ -5,6 +5,7 @@ import { loginFormSchema } from "../../utils/validators/validators";
 import { connect } from "react-redux";
 import { login } from "../../redux/auth-reducer";
 import { Redirect } from "react-router";
+import { FormField } from '../common/FormsControls/FormsControls';
 
 // Компонента для авторизации.
 
@@ -15,9 +16,9 @@ const Login = (props) => {
    return (<div>
 
       <Formik
-         initialValues={{ email: "", password: "", rememberMe: true }}
+         initialValues={{ email: "", password: "", rememberMe: true, }}
          validateOnBlur
-         onSubmit={(values, {setStatus}) => {  props.login(values.email, values.password, values.rememberMe, setStatus) }}
+         onSubmit={(values, { setStatus }) => { props.login(values.email, values.password, values.rememberMe, setStatus, values.captcha) }}
          validationSchema={loginFormSchema}
 
       >
@@ -62,6 +63,14 @@ const Login = (props) => {
                   </p>
 
                   <div>{status}</div>
+                  {props.captchaUrl && <img src={props.captchaUrl} alt='Captcha' />}
+                  {props.captchaUrl
+                     && <FormField
+                        type='text'
+                        name='captcha'
+                        as='input'
+                        placeholder='Enter captcha symbols'
+                     />}
                   <button disabled={!isValid && !dirty}
                      onClick={handleSubmit}
                      type={'submit'}>Send</button>
@@ -76,7 +85,8 @@ const Login = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-   isAuth: state.auth.isAuth
+   isAuth: state.auth.isAuth,
+   captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, { login })(Login)
