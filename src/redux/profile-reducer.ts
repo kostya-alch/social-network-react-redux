@@ -1,4 +1,5 @@
 import { profileAPI, usersAPI } from '../api/api';
+import { PhotosType, PostsType, ProfileType } from '../types';
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = ' SET_USER_PROFILE';
@@ -6,34 +7,6 @@ const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 // Редьюсер, отвечающий за логику профиля.
 
-type PostsType = {
-  id: number;
-  message: string;
-  likesCount: number;
-};
-type ContactsType = {
-  github: string;
-  vk: string;
-  facebook: string;
-  instagram: string;
-  twitter: string;
-  website: string;
-  youtube: string;
-  mainLink: string;
-};
-
-type PhotosType = {
-  small: string | null;
-  large: string | null;
-};
-type ProfileType = {
-  userId: number;
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  fullName: string;
-  contacts: ContactsType;
-  photos: PhotosType;
-};
 
 let initialState = {
   posts: [
@@ -41,7 +14,7 @@ let initialState = {
     { id: 1, message: 'Bye!, Friends!', likesCount: 10 },
     { id: 2, message: 'REACT', likesCount: 222 },
   ] as Array<PostsType>,
-  profile: null as ProfileType | null,
+  profile: null as ProfileType| null,
   status: '',
   newPostText: '',
 };
