@@ -5,16 +5,50 @@ const SET_USER_PROFILE = ' SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 // Редьюсер, отвечающий за логику профиля.
+
+type PostsType = {
+  id: number;
+  message: string;
+  likesCount: number;
+};
+type ContactsType = {
+  github: string;
+  vk: string;
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  website: string;
+  youtube: string;
+  mainLink: string;
+};
+
+type PhotosType = {
+  small: string | null;
+  large: string | null;
+};
+type ProfileType = {
+  userId: number;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  contacts: ContactsType;
+  photos: PhotosType;
+};
+
 let initialState = {
   posts: [
     { id: 0, message: 'Hi!, i am friend!', likesCount: 15 },
     { id: 1, message: 'Bye!, Friends!', likesCount: 10 },
     { id: 2, message: 'REACT', likesCount: 222 },
-  ],
-  profile: null,
+  ] as Array<PostsType>,
+  profile: null as ProfileType | null,
   status: '',
+  newPostText: '',
 };
-const profileReducer = (state = initialState, action) => {
+
+export type InitialStateType = typeof initialState;
+
+const profileReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {
@@ -39,47 +73,69 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export let addPostActionCreator = (newPostText) => ({
+export let addPostActionCreator = (
+  newPostText: string
+): AddPostActionCreatorType => ({
   type: ADD_POST,
   newPostText,
 });
 
-export let setUserProfile = (profile) => {
+type AddPostActionCreatorType = {
+  type: typeof ADD_POST;
+  newPostText: string;
+};
+export let setUserProfile = (profile: ProfileType): SetUserProfileType => {
   return {
     type: SET_USER_PROFILE,
     profile,
   };
 };
-export let setStatus = (status) => {
+
+type SetUserProfileType = {
+  type: typeof SET_USER_PROFILE;
+  profile: ProfileType;
+};
+
+export let setStatus = (status: string): SetStatusType => {
   return {
     type: SET_STATUS,
     status,
   };
 };
-export let setPhotoSuccess = (photos) => {
+
+type SetStatusType = {
+  type: typeof SET_STATUS;
+  status: string;
+};
+
+export let setPhotoSuccess = (photos: PhotosType): SetPhotoSuccessType => {
   return {
     type: SAVE_PHOTO_SUCCESS,
     photos,
   };
 };
+type SetPhotoSuccessType = {
+  type: typeof SAVE_PHOTO_SUCCESS;
+  photos: PhotosType;
+};
 
-export let getUserProfile = (userId) => async (dispatch) => {
+export let getUserProfile = (userId: number) => async (dispatch: any) => {
   let response = await usersAPI.getProfile(userId);
   dispatch(setUserProfile(response.data));
 };
-export let getStatus = (userId) => async (dispatch) => {
+export let getStatus = (userId: number) => async (dispatch: any) => {
   let response = await profileAPI.getStatus(userId);
   dispatch(setStatus(response.data));
 };
 
-export let updateStatus = (status) => async (dispatch) => {
+export let updateStatus = (status: string) => async (dispatch: any) => {
   let response = await profileAPI.updateStatus(status);
   if (response.data.resultCode === 0) {
     dispatch(setStatus(status));
   }
 };
 
-export let savePhoto = (file) => async (dispatch) => {
+export let savePhoto = (file: any) => async (dispatch: any) => {
   let response = await profileAPI.savePhoto(file);
   if (response.data.resultCode === 0) {
     dispatch(setPhotoSuccess(response.data.data.photos));
@@ -87,8 +143,13 @@ export let savePhoto = (file) => async (dispatch) => {
 };
 
 export const saveProfile =
-  (profile, setSubmitting, setFieldError, setStatus) =>
-  async (dispatch, getState) => {
+  (
+    profile: ProfileType,
+    setSubmitting: Function,
+    setFieldError: Function,
+    setStatus: Function
+  ) =>
+  async (dispatch: any, getState: any) => {
     const userId = getState().auth.userId;
     const response = await profileAPI.saveProfile(profile);
     if (response.data.resultCode === 0) {
