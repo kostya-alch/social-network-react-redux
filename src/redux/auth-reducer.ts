@@ -12,11 +12,11 @@ export type InitialStateType = {
   captchaUrl: string | null;
 };
 let initialState: InitialStateType = {
-  userId: null,
-  email: null,
-  login: null,
+  userId: null as number | null,
+  email: null as string | null,
+  login: null as string | null,
   isAuth: false,
-  captchaUrl: null,
+  captchaUrl: null as string | null,
 };
 
 const authReducer = (state = initialState, action: any): InitialStateType => {
