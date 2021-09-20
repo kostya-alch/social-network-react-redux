@@ -75,32 +75,78 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
-export const followSuccess = (userId: number) => ({ type: FOLLOW, userId });
-export const unFollowSuccess = (userId: number) => ({ type: UNFOLLOW, userId });
-export const setUsers = (users: Array<UserType>) => ({
+export const followSuccess = (userId: number): FollowSuccessActionType => ({
+  type: FOLLOW,
+  userId,
+});
+
+type FollowSuccessActionType = {
+  type: typeof FOLLOW;
+  userId: number;
+};
+export const unFollowSuccess = (userId: number): UnFollowSuccessActionType => ({
+  type: UNFOLLOW,
+  userId,
+});
+
+type UnFollowSuccessActionType = {
+  type: typeof UNFOLLOW;
+  userId: number;
+};
+export const setUsers = (users: Array<UserType>): SetUsersActionType => ({
   type: SET_USERS,
   users,
 });
-export const setCurrentPage = (currentPage: number) => ({
+type SetUsersActionType = {
+  type: typeof SET_USERS;
+  users: Array<UserType>;
+};
+
+export const setCurrentPage = (currentPage: number):SetCurrentPageActionType => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
-export const setUsersTotalCount = (totalUsersCount: number) => ({
+type SetCurrentPageActionType = {
+  type: typeof SET_CURRENT_PAGE;
+  currentPage: number;
+};
+
+export const setUsersTotalCount = (totalUsersCount: number): SetUsersTotalCountActionType => ({
   type: SET_TOTAL_USERS_COUNT,
   count: totalUsersCount,
 });
-export const toggleIsFetching = (isFetching: boolean) => ({
+
+
+type SetUsersTotalCountActionType = {
+  type: typeof SET_TOTAL_USERS_COUNT;
+  count: number
+};
+
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({
   type: TOGGLE_IS_FETCHING_LOADER,
   isFetching,
 });
+type ToggleIsFetchingActionType = {
+  type: typeof TOGGLE_IS_FETCHING_LOADER;
+  isFetching: boolean
+};
+
+
 export const toggleFollowingProgress = (
   isFetching: boolean,
   userId: number
-) => ({
+):  ToggleFollowingProgressActionType => ({
   type: TOGGLE_IS_FOLLOWING_PROGRESS,
   isFetching,
   userId,
 });
+
+type ToggleFollowingProgressActionType = {
+  type: typeof TOGGLE_IS_FOLLOWING_PROGRESS;
+  isFetching: boolean,
+  userId: number
+};
+
 
 export const getUsers = (currentPage: number, pageSize: number) => {
   return async (dispatch: any) => {
