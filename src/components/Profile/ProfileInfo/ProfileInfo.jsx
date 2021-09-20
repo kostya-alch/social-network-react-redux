@@ -24,7 +24,6 @@ const ProfileInfo = (props) => {
          .then(() => {
             setEditMode(false)
          })
-
    }
    return (
       <div>
