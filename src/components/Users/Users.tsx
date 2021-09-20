@@ -11,8 +11,8 @@ type PropsType = {
   onPageChange: (pageNumber: any) => void;
   followingInProgress: Array<number>;
   users: Array<UserType>;
-  follow: () => void;
-  unfollow: () => void;
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
 };
 
 const Users: FC<PropsType> = ({
